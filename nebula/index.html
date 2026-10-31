@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nebula Patrol</title>
+<meta name="description" content="Nebula Patrol - App Store / Google Play">
+<meta property="og:title" content="Nebula Patrol">
+<meta property="og:description" content="Download on the App Store or Google Play">
+<script>
+  // 폰 종류를 보고 바로 해당 스토어로 보낸다. 주소 뒤 ?utm_source=... 는 플레이스토어 유입 경로로 넘긴다.
+  (function () {
+    var IOS = "https://apps.apple.com/app/id6822123590";
+    var AND = "https://play.google.com/store/apps/details?id=com.voltrion.nebulapatrol";
+    var ua = navigator.userAgent || "";
+    var isIOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    var isAnd = /Android/i.test(ua);
+    var q = location.search.replace(/^\?/, "");
+    if (isAnd && q) AND += "&referrer=" + encodeURIComponent(q);
+    window.__links = { ios: IOS, android: AND };
+    if (isIOS) location.replace(IOS);
+    else if (isAnd) location.replace(AND);
+  })();
+</script>
+<style>
+  :root { --bg: #0b1026; --fg: #f3f5ff; --muted: #a9b0d6; --btn: #1d2550; --line: #3a4590; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+         background: radial-gradient(circle at 50% 20%, #26306b 0%, var(--bg) 60%); color: var(--fg);
+         font-family: system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; padding: 16px; }
+  .card { text-align: center; max-width: 420px; width: 100%; }
+  h1 { font-size: 34px; margin: 0 0 8px; letter-spacing: 0.5px; }
+  p { color: var(--muted); margin: 0 0 28px; }
+  a.btn { display: block; padding: 16px; margin: 12px 0; border-radius: 14px; background: var(--btn);
+          border: 1px solid var(--line); color: var(--fg); text-decoration: none; font-size: 18px; font-weight: 600; }
+  a.btn:hover { filter: brightness(1.2); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Nebula Patrol</h1>
+    <p>스토어로 이동 중입니다… 이동하지 않으면 아래에서 골라 주세요.</p>
+    <a class="btn" id="ios" href="https://apps.apple.com/app/id6822123590">App Store</a>
+    <a class="btn" id="and" href="https://play.google.com/store/apps/details?id=com.voltrion.nebulapatrol">Google Play</a>
+  </div>
+  <script>
+    if (window.__links) document.getElementById("and").href = window.__links.android;
+  </script>
+</body>
+</html>
